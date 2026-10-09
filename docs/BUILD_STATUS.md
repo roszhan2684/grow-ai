@@ -17,7 +17,7 @@ Numbers referenced here live in `benchmarks/results/latest.json`.
 | 9 · Billing & seats | Upgrade changes seat allowance | 🟡 | Works in demo (local state + audit). Stripe test-mode checkout not wired. |
 | 10 · Reliability | Break-it demo proves recovery | ✅ | `src/core/integrations/scenarios.ts`, Jobs & Health, `tests/unit/integrations.test.ts` |
 | 11 · Website & docs | Understandable without repo context | ✅ | Public site, `/architecture`, `/benchmarks`, `/build-log`, docs/ |
-| 12 · Launch package | All claims verified, links public | 🟡 | README, FOUNDER_DEMO, RESUME_EVIDENCE, generated benchmarks. Launch video via Hyperframes. No Loom recorded. |
+| 12 · Launch package | All claims verified, links public | 🟡 | README, FOUNDER_DEMO, RESUME_EVIDENCE, generated benchmarks, 24s launch film (`brag-output/brag.mp4`, served at `/grow-ai-launch.mp4`). No Loom walkthrough recorded. |
 
 ## Completed
 - Raw → normalized → resolved event pipeline with dedupe, conflicts, dead letters and repair + replay

@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>GROW AI — launch brag</title>
+    <script src="assets/gsap.min.js"></script>
+    <script src="assets/data.js"></script>
+    <script src="assets/rms.js"></script>
+    <style>
+      @font-face { font-family: "Bricolage Grotesque"; font-weight: 600; src: url("assets/fonts/bricolage-grotesque-600.woff2") format("woff2"); }
+      @font-face { font-family: "Bricolage Grotesque"; font-weight: 700; src: url("assets/fonts/bricolage-grotesque-700.woff2") format("woff2"); }
+      @font-face { font-family: "Bricolage Grotesque"; font-weight: 800; src: url("assets/fonts/bricolage-grotesque-800.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 400; src: url("assets/fonts/inter-400.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 500; src: url("assets/fonts/inter-500.woff2") format("woff2"); }
+      @font-face { font-family: "Inter"; font-weight: 600; src: url("assets/fonts/inter-600.woff2") format("woff2"); }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 400; src: url("assets/fonts/jetbrains-mono-400.woff2") format("woff2"); }
+      @font-face { font-family: "JetBrains Mono"; font-weight: 500; src: url("assets/fonts/jetbrains-mono-500.woff2") format("woff2"); }
+
+      :root {
+        --canvas: #f8f8f5; --card: #ffffff; --line: #e2e4de; --ink: #0f172a; --ink2: #334155; --muted: #5b6474;
+        --accent: #0f766e; --accent-soft: #e3f2ef; --team: #0d9488; --person: #2a78d6; --console: #0b1220; --mint: #99f6e4;
+        --display: "Bricolage Grotesque", Inter, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace;
+      }
+      html, body { margin: 0; background: var(--canvas); }
+      body { color: var(--ink); font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--canvas); }
+      .bg-grid { position: absolute; inset: 0; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 64px 64px; opacity: 0.55; -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 25%, transparent 75%); mask-image: radial-gradient(ellipse at 50% 40%, black 25%, transparent 75%); }
+      .clip { position: absolute; inset: 0; }
+      .scene { position: absolute; inset: 0; box-sizing: border-box; padding: 110px 140px; }
+      .eyebrow { font-family: var(--mono); font-size: 22px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin: 0; }
+      .h { font-family: var(--display); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02; margin: 0; color: var(--ink); }
+      .card { background: var(--card); border: 1.5px solid var(--line); border-radius: 24px; box-shadow: 0 40px 90px -50px rgba(15, 23, 42, 0.35); }
+      .mono { font-family: var(--mono); }
+      .tnum { font-variant-numeric: tabular-nums; }
+      .tag { display: inline-flex; align-items: center; gap: 10px; border-radius: 10px; padding: 8px 14px; font-size: 22px; font-weight: 500; }
+
+      /* S1 */
+      #s1 .copy { position: absolute; left: 140px; top: 250px; width: 760px; }
+      #s1 .h { font-size: 104px; }
+      #s1 .sub { margin-top: 34px; font-size: 30px; color: var(--ink2); line-height: 1.4; width: 640px; }
+      #s1 .counter { position: absolute; left: 140px; bottom: 130px; display: flex; gap: 48px; }
+      #s1 .counter .n { font-family: var(--display); font-weight: 700; font-size: 72px; line-height: 1; }
+      #s1 .counter .l { margin-top: 8px; font-size: 22px; color: var(--muted); }
+      #graph-wrap { position: absolute; right: 70px; top: 120px; width: 980px; height: 820px; }
+      #graph-glow { position: absolute; inset: 60px; border-radius: 50%; background: radial-gradient(circle, rgba(13, 148, 136, 0.28), rgba(13, 148, 136, 0) 65%); }
+      #graph { position: absolute; inset: 0; width: 980px; height: 820px; }
+      #graph text { font-family: Inter, sans-serif; font-size: 17px; font-weight: 600; fill: var(--ink); paint-order: stroke; stroke: var(--canvas); stroke-width: 5px; stroke-linejoin: round; }
+
+      /* S2 */
+      #s2 .h { font-size: 76px; margin-top: 18px; }
+      #s2 .card { position: absolute; left: 140px; right: 140px; top: 380px; height: 520px; }
+      #s2 .acct { position: absolute; left: 56px; top: 44px; display: flex; gap: 14px; align-items: center; }
+      #s2 .acct .name { font-family: var(--display); font-weight: 700; font-size: 40px; }
+      .warm { background: var(--accent-soft); color: #0b5c56; }
+      #s2 .when { position: absolute; left: 56px; top: 150px; font-family: var(--mono); font-size: 24px; letter-spacing: 0.14em; color: var(--muted); }
+      #s2 .score { position: absolute; right: 64px; top: 120px; text-align: right; }
+      #s2 .score .v { font-family: var(--display); font-weight: 800; font-size: 150px; line-height: 1; color: var(--ink); }
+      #s2 .score .delta { display: block; margin-top: 8px; font-family: var(--mono); font-size: 26px; color: var(--accent); }
+      .pnode { position: absolute; top: 250px; width: 300px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+      .dot { width: 64px; height: 64px; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 0 0 2px var(--line); }
+      .pnode .nm { font-size: 30px; font-weight: 600; }
+      .pnode .rl { font-size: 22px; color: var(--muted); margin-top: -6px; }
+      #n-maya { left: 30px; } #n-maya .dot { background: var(--team); }
+      #n-lena { left: 360px; } #n-lena .dot { background: #fff; box-shadow: 0 0 0 4px var(--person); }
+      #n-tomas { left: 690px; } #n-tomas .dot { background: var(--person); }
+      .link { position: absolute; top: 280px; height: 6px; border-radius: 3px; transform-origin: left center; }
+      #l-old { left: 220px; width: 600px; background: repeating-linear-gradient(90deg, #b8c0b8 0 14px, transparent 14px 26px); }
+      #l-new { left: 220px; width: 600px; background: var(--accent); }
+      #s2 .evidence { position: absolute; left: 56px; bottom: 40px; font-family: var(--mono); font-size: 22px; color: var(--ink2); }
+      #s2 .evidence b { color: var(--accent); font-weight: 500; }
+
+      /* S3 */
+      #s3 .h { font-size: 76px; margin-top: 18px; }
+      #console { position: absolute; left: 140px; right: 140px; top: 360px; height: 600px; border-radius: 24px; background: var(--console); color: #d6dde8; overflow: hidden; }
+      #console .prompt { padding: 30px 44px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); font-family: var(--mono); font-size: 26px; color: rgba(255, 255, 255, 0.75); }
+      #console .prompt span { color: var(--mint); }
+      .row { display: flex; align-items: baseline; gap: 22px; padding: 16px 44px; font-family: var(--mono); font-size: 27px; }
+      .row .ic { width: 30px; color: var(--mint); }
+      .row .tool { color: #fff; width: 430px; }
+      .row .pol { color: rgba(255, 255, 255, 0.45); width: 330px; font-size: 22px; }
+      .row .sum { color: rgba(255, 255, 255, 0.72); font-family: Inter, sans-serif; font-size: 26px; }
+      .row.gate .ic, .row.gate .pol { color: #fcd34d; }
+      .row.gate .sum { color: #fde68a; }
+      #approve { position: absolute; left: 44px; bottom: 44px; display: flex; align-items: center; gap: 24px; }
+      #approve .btn { background: #fff; color: var(--ink); border-radius: 12px; padding: 16px 26px; font-size: 26px; font-weight: 600; }
+      #approve .done { font-family: var(--mono); font-size: 25px; color: #86efac; }
+      #cursor { position: absolute; left: 300px; bottom: 30px; width: 34px; height: 44px; }
+
+      /* S4 */
+      #s4 .h { font-size: 76px; margin-top: 18px; }
+      #s4 .card { position: absolute; left: 140px; right: 140px; top: 360px; height: 600px; }
+      #s4 .top { display: flex; justify-content: space-between; align-items: center; padding: 34px 48px; border-bottom: 1.5px solid var(--line); }
+      #s4 .top .t { font-size: 30px; font-weight: 600; }
+      .toggle { position: relative; display: flex; border: 1.5px solid var(--line); border-radius: 14px; padding: 5px; font-size: 24px; }
+      .toggle span { position: relative; z-index: 1; padding: 10px 22px; width: 190px; text-align: center; }
+      #pill { position: absolute; top: 5px; left: 5px; width: 234px; height: calc(100% - 10px); border-radius: 10px; background: var(--ink); }
+      .opt-on { color: #fff; } .opt-off { color: var(--ink2); }
+      .arow { display: grid; grid-template-columns: 640px 1fr 120px; gap: 28px; align-items: center; padding: 15px 48px; font-size: 26px; }
+      .arow .lb { color: var(--ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .track { height: 18px; border-radius: 0 6px 6px 0; background: #eef0ec; }
+      .fill { height: 100%; width: 100%; border-radius: 0 6px 6px 0; background: var(--accent); transform-origin: left center; }
+      .arow .pc { text-align: right; font-family: var(--mono); font-size: 25px; }
+      #s4 .foot { position: absolute; left: 48px; bottom: 30px; font-size: 22px; color: var(--muted); }
+
+      /* S5 */
+      #s5 .h { font-size: 76px; margin-top: 18px; }
+      #chips { position: absolute; left: 140px; right: 140px; top: 380px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; }
+      .chip { position: relative; height: 210px; box-sizing: border-box; padding: 26px; border-radius: 20px; background: var(--card); border: 1.5px solid var(--line); }
+      .chip .c { font-family: var(--mono); font-size: 30px; font-weight: 500; color: var(--ink); }
+      .chip .d { margin-top: 10px; font-size: 24px; color: var(--ink2); line-height: 1.25; }
+      .chip .st { position: absolute; left: 26px; bottom: 22px; font-family: var(--mono); font-size: 21px; }
+      .st-bad { color: #b45309; } .st-ok { color: #15803d; }
+      #checks { position: absolute; left: 140px; right: 140px; top: 640px; height: 280px; display: flex; align-items: center; gap: 56px; padding: 0 56px; box-sizing: border-box; }
+      #checks .lbl { font-size: 26px; color: var(--muted); width: 300px; line-height: 1.35; }
+      #checks .pair { font-family: var(--mono); font-size: 38px; line-height: 1.7; }
+      #checks .pair span { color: var(--muted); display: inline-block; width: 220px; font-size: 26px; }
+      #eq { font-family: var(--display); font-weight: 800; font-size: 120px; color: var(--accent); }
+      #eqlbl { font-family: var(--mono); font-size: 24px; color: var(--accent); }
+
+      /* S6 */
+      #s6 .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      #logo-glow { position: absolute; left: 50%; top: 42%; width: 900px; height: 900px; margin: -450px 0 0 -450px; border-radius: 50%; background: radial-gradient(circle, rgba(13, 148, 136, 0.22), rgba(13, 148, 136, 0) 62%); }
+      #brand { display: flex; align-items: center; gap: 36px; }
+      #brand .wm { font-family: var(--display); font-weight: 800; font-size: 170px; letter-spacing: -0.04em; color: var(--ink); }
+      #tagline { margin-top: 30px; font-family: var(--display); font-weight: 600; font-size: 64px; letter-spacing: -0.02em; color: var(--ink2); }
+      #small { margin-top: 44px; font-family: var(--mono); font-size: 26px; color: var(--muted); }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-width="1920" data-height="1080" data-duration="24.2">
+      <div class="bg-grid"></div>
+
+      <!-- S1 · Hook: the graph builds itself -->
+      <section id="s1" class="clip" data-start="0" data-duration="3.9" data-track-index="1">
+        <div class="scene" id="s1-in" data-layout-allow-overlap="true">
+          <div id="graph-wrap"><div id="graph-glow"></div><svg id="graph" viewBox="0 0 980 820"></svg></div>
+          <div class="copy">
+            <p class="eyebrow" id="s1-eye">GROW AI · relationship intelligence</p>
+            <h1 class="h" id="s1-h">Your pipeline remembers every handshake.</h1>
+          </div>
+          <div class="counter">
+            <div><div class="n tnum" id="ev-n">0</div><div class="l">events projected</div></div>
+            <div><div class="n tnum" id="ed-n">0</div><div class="l">relationships</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- S2 · Warm path -->
+      <section id="s2" class="clip" data-start="3.5" data-duration="5.34" data-track-index="2">
+        <div class="scene" id="s2-in" data-layout-allow-overlap="true">
+          <p class="eyebrow">Account intelligence · warm paths</p>
+          <h2 class="h">The warmest way in, with receipts.</h2>
+          <div class="card">
+            <div class="acct"><span class="name">Acme Robotics</span><span class="tag warm">warming · 14 interactions · 5 people</span></div>
+            <div class="when" id="when-old">14 DAYS AGO</div>
+            <div class="when" id="when-new">TODAY</div>
+            <div class="score"><span class="v tnum" id="score">0.45</span><span class="delta" id="delta">+0.42 after one intro</span></div>
+            <div class="link" id="l-old"></div>
+            <div class="link" id="l-new"></div>
+            <div class="pnode" id="n-maya"><div class="dot"></div><div class="nm">Maya Okafor</div><div class="rl">CEO · our team</div></div>
+            <div class="pnode" id="n-lena"><div class="dot"></div><div class="nm">Lena Fischer</div><div class="rl">Advisor</div></div>
+            <div class="pnode" id="n-tomas"><div class="dot"></div><div class="nm">Tomas Lindqvist</div><div class="rl">VP Engineering</div></div>
+            <div class="evidence" id="evidence">evidence → <b>Lena Fischer introduced Tomas Lindqvist</b> · slack · Sep 24 · + meeting · hubspot</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- S3 · Agent -->
+      <section id="s3" class="clip" data-start="8.64" data-duration="4.11" data-track-index="3">
+        <div class="scene" id="s3-in" data-layout-allow-overlap="true">
+          <p class="eyebrow">Agent trace · policy-gated</p>
+          <h2 class="h">Shows its work. Asks before it acts.</h2>
+          <div id="console">
+            <div class="prompt"><span>$</span> What should we do next with Acme Robotics?</div>
+            <div class="row" id="r1"><span class="ic">✓</span><span class="tool">get_people_at_company</span><span class="pol">ALLOW</span><span class="sum">5 people at Acme Robotics</span></div>
+            <div class="row" id="r2"><span class="ic">✓</span><span class="tool">get_account_timeline</span><span class="pol">ALLOW</span><span class="sum">12 recent events · 12 evidence refs</span></div>
+            <div class="row" id="r3"><span class="ic">✓</span><span class="tool">find_warm_paths</span><span class="pol">ALLOW</span><span class="sum">Maya Okafor → Tomas Lindqvist · 0.87</span></div>
+            <div class="row gate" id="r4"><span class="ic">⏸</span><span class="tool">create_crm_note</span><span class="pol">REQUIRE_APPROVAL</span><span class="sum">Paused. Nothing was sent.</span></div>
+            <div id="approve"><span class="btn" id="btn">Approve &amp; execute once</span><span class="done" id="done">✓ Executed once · idempotency key · audited</span></div>
+            <svg id="cursor" viewBox="0 0 34 44"><path d="M2 2 L2 36 L11 28 L17 42 L23 39 L17 26 L30 26 Z" fill="#ffffff" stroke="#0b1220" stroke-width="2.5" stroke-linejoin="round" /></svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- S4 · Attribution -->
+      <section id="s4" class="clip" data-start="12.35" data-duration="4.1" data-track-index="4">
+        <div class="scene" id="s4-in" data-layout-allow-overlap="true">
+          <p class="eyebrow">Attribution · same touches, two models</p>
+          <h2 class="h">Credit the relationship, not the last click.</h2>
+          <div class="card">
+            <div class="top">
+              <span class="t">Acme Robotics · opportunity credit</span>
+              <div class="toggle"><div id="pill"></div><span id="opt-last" class="opt-on">Last touch</span><span id="opt-graph" class="opt-off">Graph assisted</span></div>
+            </div>
+            <div id="arows"></div>
+            <div class="foot">Credit assignment, not causal proof. Synthetic demo data.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- S5 · Break it -->
+      <section id="s5" class="clip" data-start="16.05" data-duration="4" data-track-index="5">
+        <div class="scene" id="s5-in" data-layout-allow-overlap="true">
+          <p class="eyebrow">Reliability · failure drills in CI and in the demo</p>
+          <h2 class="h">We broke it on purpose.</h2>
+          <div id="chips">
+            <div class="chip"><div class="c">429</div><div class="d">Rate limit · Retry-After</div><div class="st"><span class="st-bad sb">INJECTED</span><span class="st-ok so">✓ RECOVERED</span></div></div>
+            <div class="chip"><div class="c">401</div><div class="d">Revoked token · reauth</div><div class="st"><span class="st-bad sb">INJECTED</span><span class="st-ok so">✓ RECOVERED</span></div></div>
+            <div class="chip"><div class="c">×5</div><div class="d">Duplicate webhook</div><div class="st"><span class="st-bad sb">INJECTED</span><span class="st-ok so">✓ ONCE</span></div></div>
+            <div class="chip"><div class="c">Neo4j</div><div class="d">Graph store down</div><div class="st"><span class="st-bad sb">INJECTED</span><span class="st-ok so">✓ CAUGHT UP</span></div></div>
+            <div class="chip"><div class="c">LLM</div><div class="d">Timeout · fallback</div><div class="st"><span class="st-bad sb">INJECTED</span><span class="st-ok so">✓ NO DUPES</span></div></div>
+          </div>
+          <div id="checks" class="card">
+            <div class="lbl">Graph checksum after replaying every event twice</div>
+            <div class="pair"><div><span>Node.js</span><b id="ck1">0a49fde1791b53</b></div><div><span>Browser</span><b id="ck2">0a49fde1791b53</b></div></div>
+            <div><div id="eq">=</div><div id="eqlbl">identical</div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- S6 · Outro -->
+      <section id="s6" class="clip" data-start="19.65" data-duration="4.55" data-track-index="6">
+        <div class="scene" id="s6-in" data-layout-allow-overlap="true">
+          <div id="logo-glow"></div>
+          <div class="center">
+            <div id="brand">
+              <svg width="170" height="170" viewBox="0 0 32 32" id="mark">
+                <rect width="32" height="32" rx="8" fill="#0f172a" />
+                <line x1="9" y1="22" x2="16" y2="11" stroke="#5eead4" stroke-width="2" stroke-linecap="round" />
+                <line x1="16" y1="11" x2="23" y2="17" stroke="#5eead4" stroke-width="2" stroke-linecap="round" />
+                <line x1="9" y1="22" x2="23" y2="17" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.5" stroke-linecap="round" />
+                <circle cx="9" cy="22" r="3" fill="#ffffff" />
+                <circle cx="16" cy="11" r="3" fill="#5eead4" />
+                <circle cx="23" cy="17" r="3" fill="#ffffff" />
+              </svg>
+              <span class="wm">GROW AI</span>
+            </div>
+            <div id="tagline">Turn B2B relationships into a system.</div>
+            <div id="small">Synthetic data · real engine · grow-ai-ten.vercel.app</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Audio -->
+      <audio id="bed" data-start="0" data-duration="24.2" data-track-index="10" data-volume="1" src="assets/music/bed.mp3"
+        data-automation="{&quot;version&quot;:1,&quot;lanes&quot;:[{&quot;target&quot;:&quot;volume&quot;,&quot;points&quot;:[{&quot;t&quot;:0,&quot;v&quot;:0},{&quot;t&quot;:0.3,&quot;v&quot;:0.3},{&quot;t&quot;:0.5,&quot;v&quot;:0.15},{&quot;t&quot;:23.7,&quot;v&quot;:0.15},{&quot;t&quot;:24.15,&quot;v&quot;:0}]}]}"></audio>
+      <audio id="vo1" data-duration="3.3" data-start="0.35" data-track-index="11" data-volume="1" src="assets/vo/vo-1.wav"></audio>
+      <audio id="vo2" data-duration="4.58" data-start="4.0" data-track-index="11" data-volume="1" src="assets/vo/vo-2.wav"></audio>
+      <audio id="vo3" data-duration="3.26" data-start="9.1" data-track-index="11" data-volume="1" src="assets/vo/vo-3.wav"></audio>
+      <audio id="vo4" data-duration="3.45" data-start="12.75" data-track-index="11" data-volume="1" src="assets/vo/vo-4.wav"></audio>
+      <audio id="vo5" data-duration="3.16" data-start="16.5" data-track-index="11" data-volume="1" src="assets/vo/vo-5.wav"></audio>
+      <audio id="vo6" data-duration="3.77" data-start="20.1" data-track-index="11" data-volume="1" src="assets/vo/vo-6.wav"></audio>
+      <audio id="sfx-drop" data-start="6.25" data-duration="0.6" data-track-index="12" data-volume="0.5" src="assets/sfx/drop_001.ogg"></audio>
+      <audio id="sfx-click" data-start="11.55" data-duration="0.4" data-track-index="13" data-volume="0.6" src="assets/sfx/click_003.ogg"></audio>
+      <audio id="sfx-toggle" data-start="13.62" data-duration="0.5" data-track-index="14" data-volume="0.45" src="assets/sfx/switch_007.ogg"></audio>
+      <audio id="sfx-chip1" data-start="16.93" data-duration="0.06" data-track-index="15" data-volume="0.4" src="assets/sfx/rollover2.ogg"></audio>
+      <audio id="sfx-chip5" data-start="17.99" data-duration="0.06" data-track-index="16" data-volume="0.4" src="assets/sfx/rollover2.ogg"></audio>
+      <audio id="sfx-eq" data-start="18.5" data-duration="0.12" data-track-index="17" data-volume="0.45" src="assets/sfx/bong_001.ogg"></audio>
+      <audio id="sfx-logo" data-start="20.1" data-duration="1.48" data-track-index="18" data-volume="0.32" src="assets/sfx/impactBell_heavy_000.ogg"></audio>
+    </div>
+
+    <script>
+      (function () {
+        var D = window.GROW_DATA;
+        var NS = "http://www.w3.org/2000/svg";
+        var svg = document.getElementById("graph");
+        var byId = {};
+        D.nodes.forEach(function (n) { byId[n.id] = n; });
+        var onPath = {};
+        for (var i = 0; i < D.path.length - 1; i++) onPath[[D.path[i], D.path[i + 1]].sort().join("|")] = true;
+
+        // Edges (real projection, ordered by first-seen time)
+        var edgeEls = [];
+        D.edges.forEach(function (e) {
+          var a = byId[e.a], b = byId[e.b];
+          if (!a || !b) return;
+          var l = document.createElementNS(NS, "line");
+          l.setAttribute("x1", a.x); l.setAttribute("y1", a.y); l.setAttribute("x2", b.x); l.setAttribute("y2", b.y);
+          var hot = onPath[[e.a, e.b].sort().join("|")];
+          l.setAttribute("stroke", e.s ? "#a3a9a0" : "#334155");
+          l.setAttribute("stroke-width", e.s ? 1.2 : 1 + e.w * 2.4);
+          l.setAttribute("stroke-opacity", e.s ? 0.35 : 0.25 + e.w * 0.45);
+          l.setAttribute("class", hot ? "edge hot" : "edge");
+          var len = Math.hypot(b.x - a.x, b.y - a.y);
+          l.setAttribute("stroke-dasharray", len);
+          l.setAttribute("stroke-dashoffset", len);
+          svg.appendChild(l);
+          edgeEls.push(l);
+        });
+        var hotLine = document.createElementNS(NS, "line");
+        var pa = byId[D.path[0]], pb = byId[D.path[D.path.length - 1]];
+        hotLine.setAttribute("x1", pa.x); hotLine.setAttribute("y1", pa.y); hotLine.setAttribute("x2", pb.x); hotLine.setAttribute("y2", pb.y);
+        hotLine.setAttribute("stroke", "#0f766e"); hotLine.setAttribute("stroke-width", 6); hotLine.setAttribute("stroke-linecap", "round");
+        var hl = Math.hypot(pb.x - pa.x, pb.y - pa.y);
+        hotLine.setAttribute("stroke-dasharray", hl); hotLine.setAttribute("stroke-dashoffset", hl);
+        svg.appendChild(hotLine);
+
+        // Nodes
+        var R = { team: 11, person: 7, advisor: 8, company: 10, opportunity: 6, post: 3, topic: 4, home: 10 };
+        var C = { team: "#0d9488", person: "#2a78d6", advisor: "#2a78d6", company: "#0f172a", opportunity: "#eb6834", post: "#a3a9a0", topic: "#a3a9a0", home: "#0f172a" };
+        var nodeEls = [];
+        D.nodes.forEach(function (n) {
+          var g = document.createElementNS(NS, "g");
+          g.setAttribute("class", "node");
+          var shape;
+          if (n.k === "company") {
+            shape = document.createElementNS(NS, "rect");
+            shape.setAttribute("x", n.x - R.company); shape.setAttribute("y", n.y - R.company);
+            shape.setAttribute("width", R.company * 2); shape.setAttribute("height", R.company * 2); shape.setAttribute("rx", 3);
+          } else {
+            shape = document.createElementNS(NS, "circle");
+            shape.setAttribute("cx", n.x); shape.setAttribute("cy", n.y); shape.setAttribute("r", R[n.k] || 6);
+          }
+          shape.setAttribute("fill", C[n.k] || "#2a78d6");
+          shape.setAttribute("stroke", "#f8f8f5"); shape.setAttribute("stroke-width", 2.5);
+          g.appendChild(shape);
+          if (n.name) {
+            var t = document.createElementNS(NS, "text");
+            t.setAttribute("x", n.x); t.setAttribute("y", n.y - (R[n.k] || 6) - 10); t.setAttribute("text-anchor", "middle");
+            t.textContent = n.name;
+            g.appendChild(t);
+          }
+          svg.appendChild(g);
+          nodeEls.push(g);
+        });
+
+        // Attribution rows (real weights for the Acme opportunity)
+        var rowsEl = document.getElementById("arows");
+        var maxL = Math.max.apply(null, D.rows.map(function (r) { return r.l; }));
+        var maxG = Math.max.apply(null, D.rows.map(function (r) { return r.g; }));
+        var rowRefs = D.rows.map(function (r, i) {
+          var row = document.createElement("div");
+          row.className = "arow";
+          row.innerHTML = '<span class="lb"></span><div class="track"><div class="fill" id="f' + i + '"></div></div><span class="pc tnum" id="p' + i + '">0%</span>';
+          row.querySelector(".lb").textContent = r.label;
+          rowsEl.appendChild(row);
+          return { fill: row.querySelector(".fill"), pc: row.querySelector(".pc"), r: r };
+        });
+
+        var tl = gsap.timeline({ paused: true });
+
+        /* ── S1 · 0–3.9 ── */
+        tl.fromTo("#s1-eye", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.1);
+        tl.fromTo("#s1-h", { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 0.25);
+        tl.fromTo(nodeEls, { opacity: 0 }, { opacity: 1, duration: 0.35, stagger: { each: 0.022 } }, 0.1);
+        tl.to(edgeEls, { attr: { "stroke-dashoffset": 0 }, duration: 0.45, ease: "power2.out", stagger: { each: 2.1 / edgeEls.length } }, 0.35);
+        tl.to(hotLine, { attr: { "stroke-dashoffset": 0 }, duration: 0.6, ease: "power2.inOut" }, 2.75);
+        var ev = { n: 0 }, ed = { n: 0 };
+        tl.to(ev, { n: D.events, duration: 2.5, ease: "power2.out", onUpdate: function () { document.getElementById("ev-n").textContent = Math.round(ev.n); } }, 0.3);
+        tl.to(ed, { n: D.edges.length, duration: 2.5, ease: "power2.out", onUpdate: function () { document.getElementById("ed-n").textContent = Math.round(ed.n); } }, 0.3);
+        tl.to("#s1-in", { opacity: 0, duration: 0.38, ease: "power1.in" }, 3.5);
+
+        /* ── S2 · 3.5–8.84 ── */
+        tl.fromTo("#s2-in", { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power1.out" }, 3.5);
+        tl.fromTo("#s2 .card", { y: 40 }, { y: 0, duration: 0.7, ease: "power3.out" }, 3.5);
+        tl.set("#when-new, #l-new, #delta, #evidence", { opacity: 0 }, 0);
+        tl.fromTo("#l-old", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, 3.95);
+        // the collapse: advisor folds away, the relationship becomes direct
+        tl.to("#n-lena", { opacity: 0, scale: 0.6, duration: 0.45, ease: "power2.in" }, 6.25);
+        tl.to("#l-old", { opacity: 0, duration: 0.3 }, 6.3);
+        tl.to("#when-old", { opacity: 0, duration: 0.25 }, 6.3);
+        tl.to("#when-new", { opacity: 1, duration: 0.3 }, 6.5);
+        tl.fromTo("#l-new", { opacity: 1, scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power3.inOut" }, 6.5);
+        var sc = { v: 0.45 };
+        tl.to(sc, { v: 0.87, duration: 0.9, ease: "power2.out", onUpdate: function () { document.getElementById("score").textContent = sc.v.toFixed(2); } }, 6.5);
+        tl.fromTo("#delta", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4 }, 7.2);
+        tl.fromTo("#evidence", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 7.35);
+        tl.to("#s2-in", { opacity: 0, duration: 0.2, ease: "power1.in" }, 8.62);
+
+        /* ── S3 · 8.64–12.75 ── */
+        tl.fromTo("#s3-in", { opacity: 0 }, { opacity: 1, duration: 0.18 }, 8.66); // beat-locked: cut lands 8.74s
+        tl.set("#r1, #r2, #r3, #r4, #approve, #cursor, #done", { opacity: 0 }, 0);
+        tl.fromTo("#r1", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3 }, 9.29); // beat-grid: 9.29
+        tl.fromTo("#r2", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3 }, 9.83); // beat-grid: 9.83
+        tl.fromTo("#r3", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3 }, 10.37); // beat-grid: 10.37
+        tl.fromTo("#r4", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.3 }, 10.9); // beat-locked: 10.93s
+        tl.fromTo("#approve", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.3 }, 11.05);
+        tl.fromTo("#cursor", { opacity: 0, x: 220, y: 60 }, { opacity: 1, x: 0, y: 0, duration: 0.45, ease: "power2.out" }, 11.1);
+        tl.to("#btn", { scale: 0.95, duration: 0.08, yoyo: true, repeat: 1 }, 11.55);
+        tl.fromTo("#done", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.3 }, 11.68);
+        tl.to("#s3-in", { opacity: 0, duration: 0.38, ease: "power1.in" }, 12.35);
+
+        /* ── S4 · 12.35–16.45 ── */
+        tl.fromTo("#s4-in", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 12.35);
+        rowRefs.forEach(function (ref, i) {
+          var p = { v: 0 };
+          tl.fromTo(ref.fill, { scaleX: 0 }, { scaleX: ref.r.l / maxL, duration: 0.5, ease: "power2.out" }, 12.6);
+          tl.to(p, { v: ref.r.l, duration: 0.5, onUpdate: function () { ref.pc.textContent = p.v.toFixed(1) + "%"; } }, 12.6);
+          tl.to(ref.fill, { scaleX: ref.r.g / maxG, duration: 0.75, ease: "power3.inOut" }, 13.7);
+          tl.to(p, { v: ref.r.g, duration: 0.75, ease: "power3.inOut", onUpdate: function () { ref.pc.textContent = p.v.toFixed(1) + "%"; } }, 13.7);
+        });
+        tl.to("#pill", { x: 234, duration: 0.35, ease: "power3.inOut" }, 13.62);
+        tl.to("#opt-last", { color: "#334155", duration: 0.2 }, 13.7);
+        tl.to("#opt-graph", { color: "#ffffff", duration: 0.2 }, 13.7);
+        tl.to("#s4-in", { opacity: 0, duration: 0.38, ease: "power1.in" }, 16.05);
+
+        /* ── S5 · 16.05–20.05 ── */
+        tl.fromTo("#s5-in", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 16.05);
+        tl.set("#s5 .so", { opacity: 0, display: "none" }, 0);
+        tl.fromTo("#chips .chip", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.07, ease: "power2.out" }, 16.2);
+        var chipT = [16.93, 17.2, 17.47, 17.74, 18.0]; // accents on the beat grid (labels already readable)
+        document.querySelectorAll("#chips .chip").forEach(function (c, i) {
+          tl.set(c.querySelector(".sb"), { display: "none" }, chipT[i]);
+          tl.set(c.querySelector(".so"), { display: "inline", opacity: 1 }, chipT[i]);
+          tl.to(c, { borderColor: "#86c79a", duration: 0.25 }, chipT[i]);
+        });
+        tl.fromTo("#checks", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 18.05);
+        tl.fromTo("#eq, #eqlbl", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 18.5); // beat-locked: 18.56s
+        tl.to("#s5-in", { opacity: 0, duration: 0.38, ease: "power1.in" }, 19.65);
+
+        /* ── S6 · 19.65–24.2 ── */
+        tl.fromTo("#s6-in", { opacity: 0 }, { opacity: 1, duration: 0.45 }, 19.65);
+        tl.fromTo("#brand", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 20.05);
+        tl.fromTo("#tagline", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 21.28); // beat-grid 21.28, with the narration
+        tl.fromTo("#small", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 22.37);
+
+        /* ── Audio-reactive: the teal glow behind the graph and the logo breathes with the bed ── */
+        var RMS = window.GROW_RMS;
+        var glow1 = document.getElementById("graph-glow"), glow6 = document.getElementById("logo-glow");
+        for (var f = 0; f < Math.min(RMS.length, Math.floor(24.2 * 30)); f++) {
+          tl.call((function (v, t) {
+            return function () {
+              if (t < 3.9) glow1.style.opacity = (0.55 + v * 0.45).toFixed(3);
+              if (t > 19.6) glow6.style.opacity = (0.5 + v * 0.5).toFixed(3);
+            };
+          })(RMS[f], f / 30), [], f / 30);
+        }
+
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

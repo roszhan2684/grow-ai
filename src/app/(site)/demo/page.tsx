@@ -20,6 +20,12 @@ export default function Page() {
       <PageHeader eyebrow="Demo" title="The 90-second tour.">
         Seven stops, each a real screen running on the deterministic seed. Everything you click persists in your browser. Reset any time from the sidebar.
       </PageHeader>
+      <div className="mx-auto mb-12 max-w-4xl px-4 md:px-6">
+        <video className="card w-full overflow-hidden" controls preload="metadata" poster="/grow-ai-launch.jpg" aria-label="GROW AI 24-second launch film">
+          <source src="/grow-ai-launch.mp4" type="video/mp4" />
+        </video>
+        <p className="mt-2 text-[12px] text-muted">24-second launch film, built from the real engine&apos;s data with HyperFrames. Narration: Kokoro TTS. Music: “Happy Beats / Business Moves vol. 12” by ende.app.</p>
+      </div>
       <ol className="mx-auto max-w-4xl space-y-3 px-4 md:px-6">
         {STEPS.map((s, i) => (
           <li key={s.title} className="card grid gap-4 p-5 md:grid-cols-[120px_1fr_auto] md:items-center">

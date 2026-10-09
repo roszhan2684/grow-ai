@@ -57,6 +57,9 @@ export default async function Home() {
                 GitHub ↗
               </a>
             </div>
+            <Link href="/demo" className="mt-4 inline-flex items-center gap-2 text-[13px] font-medium text-accent hover:underline">
+              ▶ Watch the 24-second launch film
+            </Link>
             <p className="mt-6 max-w-md text-[12.5px] leading-relaxed text-muted">
               Synthetic data, real engine. The graph on the right isn&apos;t a mockup. It&apos;s the product replaying its own 90-day seed, event by event.
             </p>
