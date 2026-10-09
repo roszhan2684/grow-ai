@@ -1,0 +1,151 @@
+{
+  "generated_at": "2026-10-09T23:41:24.106Z",
+  "commit": "f3a755c",
+  "environment": {
+    "node": "v22.14.0",
+    "platform": "darwin arm64",
+    "cpu": "Apple M4 Pro",
+    "cores": 12
+  },
+  "seed": {
+    "raw_events": 258,
+    "target_accounts": 12,
+    "people": 45,
+    "posts": 30,
+    "engagements": 120,
+    "meetings": 8,
+    "opportunities": 5,
+    "closed_won": 2,
+    "graph_nodes": 110,
+    "graph_edges": 303,
+    "workspace_build_median_ms": 11.3
+  },
+  "ingestion": {
+    "events": 10000,
+    "normalized": 9413,
+    "duplicates": 478,
+    "dead_letters": 109,
+    "median_ms": 190.9,
+    "events_per_sec": 52390
+  },
+  "projection": {
+    "normalized_events": 9415,
+    "nodes": 150,
+    "edges": 2316,
+    "median_ms": 7.8
+  },
+  "warm_paths": {
+    "seed_graph": {
+      "queries": 500,
+      "p50_ms": 0.017,
+      "p95_ms": 0.037,
+      "max_ms": 0.648
+    },
+    "expanded_graph": {
+      "queries": 500,
+      "p50_ms": 0.073,
+      "p95_ms": 0.183,
+      "max_ms": 0.302
+    }
+  },
+  "account_page": {
+    "samples": 240,
+    "p50_ms": 0.253,
+    "p95_ms": 0.62,
+    "note": "in-process read-model compute; excludes network and React rendering"
+  },
+  "replay": {
+    "seed_graph_checksum": "0a49fde1791b53",
+    "seed_checksums_equal": true,
+    "replay_twice_duplicate_normalized": 0,
+    "replay_twice_checksum_equal": true,
+    "expanded_checksum_equal": true
+  },
+  "agent_eval": {
+    "total": 200,
+    "passed": 200,
+    "suites": [
+      {
+        "suite": "warm_path",
+        "total": 50,
+        "passed": 50
+      },
+      {
+        "suite": "account_summary",
+        "total": 50,
+        "passed": 50
+      },
+      {
+        "suite": "content_differentiation",
+        "total": 50,
+        "passed": 50
+      },
+      {
+        "suite": "action_policy",
+        "total": 30,
+        "passed": 30
+      },
+      {
+        "suite": "prompt_injection",
+        "total": 20,
+        "passed": 20
+      }
+    ],
+    "planner": "rule-based deterministic planner (no LLM in the loop)"
+  },
+  "failure_recovery": [
+    {
+      "kind": "rate_limit",
+      "assertions": 3,
+      "passed": 3,
+      "outcome": "Synced 172/172 events after honoring Retry-After."
+    },
+    {
+      "kind": "auth_expired",
+      "assertions": 3,
+      "passed": 3,
+      "outcome": "Token refreshed once; sync completed."
+    },
+    {
+      "kind": "auth_revoked",
+      "assertions": 5,
+      "passed": 5,
+      "outcome": "Marked REAUTH_REQUIRED at cursor 1; reconnect resumed with zero drift."
+    },
+    {
+      "kind": "server_error",
+      "assertions": 3,
+      "passed": 3,
+      "outcome": "Recovered after 4 attempts; persistent outage dead-lettered after 5."
+    },
+    {
+      "kind": "duplicate_webhook",
+      "assertions": 4,
+      "passed": 4,
+      "outcome": "5 deliveries → 1 normalized event, 4 recorded duplicates."
+    },
+    {
+      "kind": "graph_unavailable",
+      "assertions": 4,
+      "passed": 4,
+      "outcome": "App stayed up on a stale projection (lag 50); catch-up matched a clean rebuild."
+    },
+    {
+      "kind": "llm_timeout",
+      "assertions": 4,
+      "passed": 4,
+      "outcome": "Retried once, then fell back to a template summary. Side effects not duplicated."
+    },
+    {
+      "kind": "partial_batch",
+      "assertions": 3,
+      "passed": 3,
+      "outcome": "8 committed, 2 dead-lettered with readable causes."
+    }
+  ],
+  "tests": {
+    "total": 79,
+    "passed": 79,
+    "files": 7
+  }
+}
