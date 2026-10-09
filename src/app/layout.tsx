@@ -1,10 +1,31 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({ variable: "--font-bricolage", subsets: ["latin"], weight: ["500", "600", "700", "800"] });
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"], weight: ["400", "500"] });
+// Self-hosted (no build-time network fetch): CI builds were flaking on the Google Fonts download.
+const bricolage = localFont({
+  variable: "--font-bricolage",
+  src: [
+    { path: "./fonts/bricolage-grotesque-600.woff2", weight: "600" },
+    { path: "./fonts/bricolage-grotesque-700.woff2", weight: "700" },
+    { path: "./fonts/bricolage-grotesque-800.woff2", weight: "800" },
+  ],
+});
+const inter = localFont({
+  variable: "--font-inter",
+  src: [
+    { path: "./fonts/inter-400.woff2", weight: "400" },
+    { path: "./fonts/inter-500.woff2", weight: "500" },
+    { path: "./fonts/inter-600.woff2", weight: "600" },
+  ],
+});
+const jetbrains = localFont({
+  variable: "--font-jetbrains",
+  src: [
+    { path: "./fonts/jetbrains-mono-400.woff2", weight: "400" },
+    { path: "./fonts/jetbrains-mono-500.woff2", weight: "500" },
+  ],
+});
 
 export const metadata: Metadata = {
   title: { default: "GROW AI — Relationship intelligence for B2B growth", template: "%s · GROW AI" },
