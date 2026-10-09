@@ -4,7 +4,7 @@
 
 > Independent portfolio project. Every company, person, post and dollar amount in the demo is **synthetic** (`.example` domains). Every engineering number below comes from a checked-in artifact, never typed by hand.
 
-**Live demo** → `/app` on the deployed site · **Website** → `/` · **Benchmarks** → [docs/BENCHMARKS.md](docs/BENCHMARKS.md) · **What's real vs. not** → [docs/BUILD_STATUS.md](docs/BUILD_STATUS.md)
+**Live demo** → https://grow-ai-ten.vercel.app/app · **Website** → https://grow-ai-ten.vercel.app · **Benchmarks** → [docs/BENCHMARKS.md](docs/BENCHMARKS.md) · **What's real vs. not** → [docs/BUILD_STATUS.md](docs/BUILD_STATUS.md)
 
 ---
 
