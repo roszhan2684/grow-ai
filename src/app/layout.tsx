@@ -30,7 +30,7 @@ const jetbrains = localFont({
 export const metadata: Metadata = {
   title: { default: "GROW AI — Relationship intelligence for B2B growth", template: "%s · GROW AI" },
   description:
-    "GROW AI models the people, content and interactions behind B2B pipeline as a graph, turns it into evidence-backed actions, and explains which touches contributed to revenue. Portfolio project · synthetic demo data.",
+    "GROW AI models the people, content and interactions behind B2B pipeline as a graph, turns it into evidence-backed actions, and explains which touches contributed to revenue.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

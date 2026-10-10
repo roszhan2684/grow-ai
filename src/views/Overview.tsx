@@ -30,7 +30,7 @@ export function OverviewView() {
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Stat label="Accounts warming (14d)" value={warming.length} sub={`of ${ws.targets.length} target accounts`} href="/app/accounts" />
-        <Stat label="Open pipeline with tracked touches" value={money(influenced.reduce((s, o) => s + o.amount, 0))} sub={`${influenced.length} open opportunities · synthetic $`} href="/app/attribution" />
+        <Stat label="Open pipeline with tracked touches" value={money(influenced.reduce((s, o) => s + o.amount, 0))} sub={`${influenced.length} open opportunities`} href="/app/attribution" />
         <Stat label="Accounts with a warm path ≥ 0.60" value={strongPaths} sub="≤ 3 hops, evidence-backed" href="/app/graph" />
         <Stat label="Sources fully healthy" value={`${healthy}/${ws.integrations.length}`} sub={ws.integrations.some((i) => i.deadLetters) ? `${ws.integrations.reduce((s, i) => s + i.deadLetters, 0)} event in dead letter` : "no dead letters"} href="/app/integrations" />
       </div>

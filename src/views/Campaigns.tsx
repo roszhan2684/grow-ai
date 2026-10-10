@@ -146,7 +146,7 @@ export function CampaignsView() {
           <p className="text-xs text-muted">Try it: type “guaranteed 100% uptime” or a made-up percentage into a draft. The checks re-run on every keystroke and block approval.</p>
 
           {approvedAny && (
-            <Card title="Close the loop" subtitle="Approved drafts become post events. Record synthetic engagement to watch the graph, signals and attribution update.">
+            <Card title="Close the loop" subtitle="Approved drafts become post events. Record sample engagement to watch the graph, signals and attribution update.">
               <div className="flex flex-wrap gap-2 px-5 py-4">
                 {live
                   .filter((d) => state.draftStatus[d.id] === "approved")

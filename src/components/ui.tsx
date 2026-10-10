@@ -159,7 +159,7 @@ export function money(n: number) {
 export function DemoTag({ className }: { className?: string }) {
   return (
     <Badge tone="warning" className={className}>
-      Synthetic demo data
+      Sample workspace
     </Badge>
   );
 }

@@ -7,7 +7,7 @@ export async function GET() {
   const ws = buildWorkspace(generateSeed().rawEvents);
   return Response.json({
     status: "ok",
-    mode: "demo (in-process engine, synthetic seed)",
+    mode: "sample workspace (in-process engine)",
     projectionVersion: PROJECTION_VERSION,
     attributionVersion: ATTRIBUTION_VERSION,
     graphChecksum: ws.checksum,

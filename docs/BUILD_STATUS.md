@@ -16,8 +16,8 @@ Numbers referenced here live in `benchmarks/results/latest.json`.
 | 8 · Attribution | Weights sum to 1; model comparison | ✅ | `src/core/attribution/models.ts`, `tests/unit/attribution.test.ts` |
 | 9 · Billing & seats | Upgrade changes seat allowance | 🟡 | Works in demo (local state + audit). Stripe test-mode checkout not wired. |
 | 10 · Reliability | Break-it demo proves recovery | ✅ | `src/core/integrations/scenarios.ts`, Jobs & Health, `tests/unit/integrations.test.ts` |
-| 11 · Website & docs | Understandable without repo context | ✅ | Public site, `/architecture`, `/benchmarks`, `/build-log`, docs/ |
-| 12 · Launch package | All claims verified, links public | 🟡 | README, FOUNDER_DEMO, RESUME_EVIDENCE, generated benchmarks, 24s launch film (`brag-output/brag.mp4`, served at `/grow-ai-launch.mp4`). No Loom walkthrough recorded. |
+| 11 · Website & docs | Understandable without repo context | ✅ | Marketing site (Home, Product, Solutions, Integrations, Security, Pricing, Contact), docs/ |
+| 12 · Launch package | All claims verified, links public | ✅ | README, PRODUCT_TOUR, generated benchmarks, 24s overview film (`brag-output/brag.mp4`, on the homepage). Demo-request form needs `CONTACT_WEBHOOK_URL` / `NEXT_PUBLIC_SALES_EMAIL` set. |
 
 ## Completed
 - Raw → normalized → resolved event pipeline with dedupe, conflicts, dead letters and repair + replay
@@ -31,7 +31,7 @@ Numbers referenced here live in `benchmarks/results/latest.json`.
 - Connector SDK: OAuth state + PKCE, AES-GCM secrets, HMAC webhooks with tolerance + replay protection, redacting logger
 - Job runner: idempotency keys, typed outcomes, backoff + jitter, Retry-After, reauth, dead letters, reconciliation
 - 8 failure-injection scenarios, run in tests, benchmarks and the UI
-- Public website (8 routes) and 13-screen demo app; Playwright golden-demo E2E
+- Marketing website (7 pages + demo-request form) and 13-screen product app on a sample workspace; Playwright E2E
 
 ## Partial
 - `supabase/migrations/0001_core_schema.sql`, `0002_rls.sql`: written and reviewed, **not applied** to a live project

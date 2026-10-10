@@ -38,7 +38,7 @@ export function GraphHero({ nodes, edges, eventTimes, now, path, pathLabel }: { 
           <span className="size-2.5 rounded-full bg-line-strong" />
           <span className="size-2.5 rounded-full bg-line-strong" />
         </div>
-        <p className="font-mono text-[11px] text-muted">northstar-cloud · relationship graph · synthetic</p>
+        <p className="font-mono text-[11px] text-muted">sample workspace · relationship graph</p>
         <button onClick={() => (setDaysBack(90), setPlaying(true))} className="rounded-md border border-line px-2 py-0.5 text-[11px] text-ink-2 hover:bg-surface-2">
           ↻ Replay
         </button>

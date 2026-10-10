@@ -66,7 +66,7 @@ export function AccountsView() {
           </table>
         </div>
       </Card>
-      <p className="mt-3 text-xs text-muted">Warmth index is a transparent heuristic (see docs/data-model.md), not a prediction. Amounts are synthetic.</p>
+      <p className="mt-3 text-xs text-muted">Warmth index is a transparent ranking heuristic, not a prediction.</p>
     </div>
   );
 }

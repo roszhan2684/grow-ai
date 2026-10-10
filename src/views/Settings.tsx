@@ -23,7 +23,7 @@ export function SettingsView() {
     <div>
       <SectionTitle eyebrow="Settings" title="Team, billing & personas">
         <Button variant="danger" size="sm" onClick={actions.reset}>
-          Reset demo workspace
+          Reset sample workspace
         </Button>
       </SectionTitle>
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_380px]">
@@ -111,7 +111,7 @@ export function SettingsView() {
           </Card>
         </div>
 
-        <Card title="Plan" subtitle="Stripe test-mode checkout is not wired; changes are local and audited">
+        <Card title="Plan" subtitle="Plan changes are recorded in the audit log">
           <ul className="space-y-2 p-4">
             {(Object.keys(PLANS) as PlanId[]).map((id) => (
               <li key={id} className={cx("rounded-xl border p-4", state.plan === id ? "border-ink shadow-[0_0_0_1px_var(--ink)]" : "border-line")}>

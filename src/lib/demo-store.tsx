@@ -198,7 +198,7 @@ export function useDemo() {
 export function activationSteps(ws: Workspace, state: DemoState) {
   const team = [...ws.directory.people.values()].filter((p) => p.personaRole);
   return [
-    { id: "org", label: "Create organization", done: true, detail: "Northstar Cloud (synthetic)" },
+    { id: "org", label: "Create organization", done: true, detail: "Northstar Cloud" },
     { id: "personas", label: "Add 3 executive personas", done: team.length >= 3, detail: `${team.length} personas` },
     { id: "integrations", label: "Connect a data source", done: ws.integrations.some((i) => i.received > 0), detail: `${ws.integrations.filter((i) => i.received > 0).length} sources connected` },
     { id: "graph", label: "Build the first relationship graph", done: ws.graph.edges.size > 0, detail: `${ws.graph.nodes.size} nodes · ${ws.graph.edges.size} edges` },

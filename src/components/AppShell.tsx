@@ -58,13 +58,13 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </Link>
         <div className="mb-4 rounded-lg border border-line bg-surface px-2.5 py-2">
           <p className="text-[12.5px] font-semibold text-ink">Northstar Cloud</p>
-          <p className="text-[11px] text-muted">Demo org · fictional</p>
+          <p className="text-[11px] text-muted">Sample workspace</p>
         </div>
         {nav}
         <div className="mt-auto space-y-2 px-1 pt-4">
-          <p className="text-[11px] leading-snug text-muted">Your changes live in this browser and replay through the same engine.</p>
+          <p className="text-[11px] leading-snug text-muted">Changes are saved in this browser.</p>
           <Button size="sm" variant="secondary" onClick={actions.reset} className="w-full">
-            Reset demo
+            Reset sample data
           </Button>
         </div>
       </aside>
@@ -77,9 +77,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <span className="hidden font-mono text-[11px] text-muted sm:inline">as of Oct 1, 2026 · {ws.ingest.raw.length} raw events</span>
           </div>
           <div className="flex items-center gap-2">
-            <Badge tone="warning">Synthetic demo data</Badge>
+            <Badge tone="accent">Sample workspace</Badge>
             <Link href="/" className="text-xs text-muted hover:text-ink">
-              Site ↗
+              Website ↗
             </Link>
           </div>
         </header>

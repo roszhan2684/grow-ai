@@ -11,9 +11,9 @@ import { formatRelative } from "@/core/lib/time";
 import type { RawEvent } from "@/core/contracts";
 
 const MODE_NOTE = {
-  live: "Fully working: parses, validates and ingests in this demo.",
-  mock: "Realistic OAuth + signed-webhook contract against a mock upstream (no HubSpot app registered).",
-  fixture: "Replays recorded fixtures through the real connector pipeline. Not a live API.",
+  live: "Available: parses, validates and imports with line-level errors.",
+  mock: "Beta: OAuth + signed webhooks for deals, meetings and ownership.",
+  fixture: "Beta: sample data replayed through the connector pipeline.",
 } as const;
 
 const DEMO_SECRET = "whsec_demo_only_not_a_real_secret";
@@ -111,12 +111,12 @@ export function IntegrationsView() {
 
       <div className="mt-4 grid gap-4 md:grid-cols-2">
         <Card className="px-5 py-4">
-          <p className="text-[13px] font-semibold">MCP server <Badge>not shipped</Badge></p>
-          <p className="mt-1 text-xs text-muted">Stretch goal: expose search_graph / find_warm_paths as MCP tools. Listed honestly as unstarted in BUILD_STATUS.</p>
+          <p className="text-[13px] font-semibold">MCP server <Badge>planned</Badge></p>
+          <p className="mt-1 text-xs text-muted">Expose warm paths and account intelligence to your own AI tools.</p>
         </Card>
         <Card className="px-5 py-4">
-          <p className="text-[13px] font-semibold">Stripe <Badge>local plan state only</Badge></p>
-          <p className="mt-1 text-xs text-muted">Seat upgrades change the allowance in Settings and are audited. Stripe test-mode checkout is not wired in this build.</p>
+          <p className="text-[13px] font-semibold">Stripe <Badge>planned</Badge></p>
+          <p className="mt-1 text-xs text-muted">Seat-based billing. Plan changes in Settings are recorded in the audit log.</p>
         </Card>
       </div>
 

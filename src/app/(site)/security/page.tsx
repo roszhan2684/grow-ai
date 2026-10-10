@@ -1,53 +1,38 @@
 import type { Metadata } from "next";
-import { PageHeader } from "@/components/site/SiteChrome";
+import { CtaBand, PageHero } from "@/components/site/SiteChrome";
 
-export const metadata: Metadata = { title: "Security", description: "Threat model and tested mitigations for GROW AI." };
+export const metadata: Metadata = { title: "Security", description: "How GROW AI protects your data and keeps people in control of AI actions." };
 
-const THREATS: [string, string, string, string][] = [
-  ["Cross-tenant data access", "org_id on every customer row; RLS via is_member(); org-partitioned graph keys", "partial", "RLS policies written (0002_rls.sql); not yet exercised against a live database"],
-  ["OAuth token leakage", "AES-GCM encrypted at rest; token values kept apart from metadata; mandatory log redaction", "tested", "integrations.test.ts: round trip + “logs never contain tokens”"],
-  ["Webhook spoofing", "HMAC-SHA256 over method + path + body + timestamp; constant-time compare", "tested", "Forged signature rejected; tampered body → 401"],
-  ["Webhook replay", "±5 min timestamp tolerance; seen-signature set; dedupe on provider ID + payload hash", "tested", "Replayed signature rejected; 5 deliveries → 1 normalized event"],
-  ["OAuth CSRF / code interception", "state + PKCE (S256); verifier stored httpOnly, never returned to the client", "tested", "PKCE challenge length + determinism"],
-  ["Prompt injection in ingested content", "Ingested text returned separately and marked untrusted; plans built from the user's request only; instruction-shaped text flagged", "tested", "20/20 injection eval cases; seeded hostile comment"],
-  ["Agent side effects", "Static per-tool policy (ALLOW / REQUIRE_APPROVAL / DENY); idempotency keys; audit entries", "tested", "30/30 policy eval cases; approve-twice is a no-op"],
-  ["Duplicate side effects on retry", "Side effects are proposed once with a fixed idempotency key; retries never re-issue them", "tested", "LLM-timeout scenario: identical pending actions across retries"],
-  ["PII over-collection", "Connectors normalize to the minimal domain fields; provider payloads never leave the connector", "design", "Normalizers are the only place provider shapes exist"],
+const PX = "px-5 md:px-10 xl:px-16";
+
+const CONTROLS: [string, string][] = [
+  ["Human approval for AI actions", "CRM notes, scheduled posts and outbound messages always pause for a person. Approved actions run exactly once."],
+  ["Policy per action, not per prompt", "What the agent may do is fixed for each action. Instructions hidden in imported content are treated as data and flagged."],
+  ["Encrypted credentials", "Integration tokens are encrypted at rest and stored separately from their metadata. Tokens are redacted from every log."],
+  ["Verified webhooks", "Incoming webhooks are signature-checked, time-boxed and protected against replay."],
+  ["Secure sign-in to integrations", "OAuth connections use state and PKCE, with verifiers kept server-side."],
+  ["Roles and seats", "Owner, admin, operator, member and viewer roles control who can approve, connect and configure."],
+  ["Audit log", "Approvals, permission changes, integration changes, repairs and replays are recorded with who and when."],
+  ["Organization-scoped data model", "Every record belongs to an organization, and the graph is partitioned by organization."],
 ];
 
 export default function Page() {
   return (
     <>
-      <PageHeader eyebrow="Security" title="A threat model that names what isn't finished.">
-        Mitigations marked <strong>tested</strong> have a test in the repo that fails if they regress. <strong>Partial</strong> means the control is written but not yet proven against live infrastructure.
-      </PageHeader>
-      <div className="mx-auto max-w-6xl px-4 md:px-6">
-        <div className="card overflow-x-auto">
-          <table className="w-full min-w-[860px] text-left text-[13px]">
-            <thead className="border-b border-line bg-surface-2 text-[11px] uppercase tracking-wide text-muted">
-              <tr>
-                <th className="px-4 py-2.5 font-medium">Threat</th>
-                <th className="px-4 py-2.5 font-medium">Mitigation</th>
-                <th className="px-4 py-2.5 font-medium">Status</th>
-                <th className="px-4 py-2.5 font-medium">Evidence</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-line">
-              {THREATS.map(([t, m, s, e]) => (
-                <tr key={t} className="align-top">
-                  <td className="px-4 py-3 font-medium">{t}</td>
-                  <td className="px-4 py-3 text-ink-2">{m}</td>
-                  <td className="px-4 py-3">
-                    <span className={`rounded-md border px-1.5 py-0.5 font-mono text-[11px] ${s === "tested" ? "border-[#c5e6cf] bg-[#e8f5ec] text-positive" : s === "partial" ? "border-[#f3d9b1] bg-[#fdf3e3] text-warning" : "border-line bg-surface-2 text-ink-2"}`}>{s}</span>
-                  </td>
-                  <td className="px-4 py-3 text-[12.5px] text-muted">{e}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <PageHero eyebrow="Security" title="Your relationships are your advantage. We treat them that way.">
+        GROW AI is designed so people stay in control of AI, credentials stay protected, and every action leaves a trail.
+      </PageHero>
+      <section className="w-full">
+        <div className="grid w-full gap-px bg-line md:grid-cols-2">
+          {CONTROLS.map(([t, d]) => (
+            <div key={t} className={`bg-canvas ${PX} py-12`}>
+              <h2 className="font-display text-[24px] font-semibold">{t}</h2>
+              <p className="mt-2 max-w-xl text-[15.5px] leading-relaxed text-ink-2">{d}</p>
+            </div>
+          ))}
         </div>
-        <p className="mt-4 text-[13px] text-muted">The demo webhook secret is public by design so visitors can sign test requests. Production would load it from the environment, which the route already supports.</p>
-      </div>
+      </section>
+      <CtaBand title="Have a security questionnaire?" body="Book a call and we'll walk your team through how GROW AI handles data, access and AI actions." />
     </>
   );
 }

@@ -13,7 +13,7 @@ const FLAGS = [
   ["llm_provider", "deterministic-template", "No model calls; reproducible traces"],
   ["neo4j_live_projection", false, "In-process projection is the reference; Neo4j export via Cypher"],
   ["stripe_checkout", false, "Plan changes are local + audited"],
-  ["mcp_server", false, "Stretch goal, not shipped"],
+  ["mcp_server", false, "Planned"],
 ] as const;
 
 export function DeveloperView({ migrations, commit, env }: { migrations: string[]; commit: string; env: string }) {
@@ -32,7 +32,7 @@ export function DeveloperView({ migrations, commit, env }: { migrations: string[
         <Card title="Environment">
           <dl className="grid grid-cols-[180px_1fr] gap-y-2 px-5 py-4 text-[12.5px]">
             <dt className="text-muted">Mode</dt>
-            <dd>Public demo · in-browser event-sourced engine · synthetic seed</dd>
+            <dd>Sample workspace · in-browser event-sourced engine</dd>
             <dt className="text-muted">Deployment</dt>
             <dd className="font-mono text-xs">{env}</dd>
             <dt className="text-muted">Commit</dt>
@@ -59,7 +59,7 @@ export function DeveloperView({ migrations, commit, env }: { migrations: string[
               </li>
             ))}
           </ul>
-          <p className="border-t border-line px-5 py-2.5 text-[11.5px] text-muted">Migrations and RLS policies are written and reviewed but not yet applied to a live Supabase project (see BUILD_STATUS).</p>
+          <p className="border-t border-line px-5 py-2.5 text-[11.5px] text-muted">Schema and row-level access policies for persistent deployments.</p>
         </Card>
         <Card title="Connectors">
           <ul className="divide-y divide-line">

@@ -33,7 +33,7 @@ export function JobsView() {
 
       <div className="mb-6 grid grid-cols-2 gap-3 lg:grid-cols-4">
         {[
-          ["Connector freshness", `${Math.max(...freshest).toFixed(1)}d`, "oldest last-success (synthetic clock)"],
+          ["Connector freshness", `${Math.max(...freshest).toFixed(1)}d`, "oldest last successful sync"],
           ["Normalize success rate", `${(successRate * 100).toFixed(1)}%`, `${ws.ingest.stats.deadLetters} dead-lettered`],
           ["Graph projection lag", ws.projectionLag, state.graphOutageAt !== null ? "outage injected" : "events behind Postgres"],
           ["Dead letters", dead, `${ws.repairedDeadLetters.size} repaired & replayed`],

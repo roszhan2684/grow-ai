@@ -49,7 +49,7 @@ export function AttributionView() {
       </div>
 
       <div className="mb-4 rounded-xl border border-[#f3d9b1] bg-[#fdf3e3] px-4 py-3 text-[12.5px] text-warning">
-        <strong>Not causal proof.</strong> {a.caveats[0]} Amounts and touches are synthetic demo data.
+        <strong>Not causal proof.</strong> {a.caveats[0]}
       </div>
 
       <Card

@@ -93,7 +93,7 @@ export function DataQualityView() {
                   {!repaired && d.kind === "deal.created" && (
                     <div className="mt-3 flex flex-wrap items-center gap-2">
                       <label className="text-xs text-muted" htmlFor={`amt_${d.id}`}>
-                        Corrected amount (synthetic)
+                        Corrected amount
                       </label>
                       <input id={`amt_${d.id}`} value={amount} onChange={(e) => setAmount(e.target.value.replace(/[^0-9]/g, ""))} className="w-28 rounded-md border border-line bg-surface px-2 py-1 font-mono text-xs" />
                       <Button size="sm" variant="primary" onClick={() => actions.repairDeadLetter(d.id, d, { ...d.payload, amount: Number(amount) })}>

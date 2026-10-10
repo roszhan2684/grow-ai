@@ -1,6 +1,6 @@
-# 90-second demo: exact clicks
+# Product tour: 90 seconds
 
-Start from a fresh browser (or click **Reset demo** in the sidebar).
+Start from a fresh browser (or click **Reset sample data** in the sidebar).
 
 | Time | Click | Say |
 | --- | --- | --- |
@@ -10,4 +10,4 @@ Start from a fresh browser (or click **Reset demo** in the sidebar).
 | 40–55s | **Ask the agent →** → **Run** → **Approve & execute once**; then suggestion "Send a message to Tomas…" | "Every recommendation cites events. The CRM write needed approval and ran exactly once. Outbound pauses too." |
 | 55–70s | `/app/campaigns`: type "guaranteed 100% uptime" in the CEO draft, then **Revert** → **Approve** | "Same theme, three voices, overlap under 0.30. Forbidden claims block approval." |
 | 70–82s | `/app/attribution`, Acme selected | "Last touch gives everything to the final like. Graph-assisted gives the advisor's intro the most credit. Not causal proof, and it says so." |
-| 82–90s | `/app/jobs` → **Duplicate webhook** (or **Take Neo4j down**) | "The interesting part was making integrations and the graph replayable under rate limits, duplicates, partial failure and stale identity data." |
+| 82–90s | `/app/jobs` → **Duplicate webhook** (or **Take Neo4j down**) | "Integrations recover on their own from rate limits, duplicates and outages, and you can see it happen." |

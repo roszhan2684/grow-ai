@@ -2,9 +2,9 @@
 
 **Turn B2B relationships into a system.** GROW AI models the people, content, meetings and deals behind B2B pipeline as a graph, turns that graph into evidence-backed next actions, and explains which touches contributed to revenue without pretending attribution is causal proof.
 
-> Independent portfolio project. Every company, person, post and dollar amount in the demo is **synthetic** (`.example` domains). Every engineering number below comes from a checked-in artifact, never typed by hand.
+> The live app ships with a **sample workspace** (fictional companies on `.example` domains) so anyone can explore it immediately. Engineering numbers below come from a checked-in benchmark artifact.
 
-**Live demo** → https://grow-ai-ten.vercel.app/app · **24s launch film** → https://grow-ai-ten.vercel.app/demo · **Website** → https://grow-ai-ten.vercel.app · **Benchmarks** → [docs/BENCHMARKS.md](docs/BENCHMARKS.md) · **What's real vs. not** → [docs/BUILD_STATUS.md](docs/BUILD_STATUS.md)
+**Website** → https://grow-ai-ten.vercel.app · **Product (sample workspace)** → https://grow-ai-ten.vercel.app/app · **Overview film** → https://grow-ai-ten.vercel.app/#overview · **Benchmarks** → [docs/BENCHMARKS.md](docs/BENCHMARKS.md) · **What's real vs. not** → [docs/BUILD_STATUS.md](docs/BUILD_STATUS.md)
 
 ---
 
@@ -12,7 +12,7 @@
 
 Trust in B2B compounds across dozens of human touches: a CEO's post, a VP's reply, an advisor's intro, a meeting. Those touches live in five tools, so teams can't see who is warming up, can't find the warm way in, and fall back to last-touch attribution, which hands 100% of the credit to whatever happened last.
 
-## The golden demo (90 seconds)
+## Product tour (90 seconds)
 
 1. **Overview**: accounts warming in the last 14 days, computed from the event log.
 2. **Acme Robotics**: five stakeholders engaging on reliability; the account is warming.
@@ -22,7 +22,7 @@ Trust in B2B compounds across dozens of human touches: a CEO's post, a VP's repl
 6. **Attribution**: last touch vs. graph-assisted on the same touches; the advisor's intro gets the most credit, with caveats.
 7. **Jobs & Health**: inject a 429, revoked token, duplicate webhook, Neo4j outage or LLM timeout and watch it recover, with assertions.
 
-Exact clicks and talking points: [docs/FOUNDER_DEMO.md](docs/FOUNDER_DEMO.md).
+Exact clicks: [docs/PRODUCT_TOUR.md](docs/PRODUCT_TOUR.md).
 
 ## Architecture
 
@@ -78,6 +78,14 @@ See **[docs/BENCHMARKS.md](docs/BENCHMARKS.md)** (generated) and `benchmarks/res
 ```bash
 npm run bench
 ```
+
+## Configuration
+
+| Variable | Purpose |
+| --- | --- |
+| `CONTACT_WEBHOOK_URL` | Where "Book a demo" leads are POSTed (Slack incoming webhook, Zapier, Make, CRM endpoint). |
+| `NEXT_PUBLIC_SALES_EMAIL` | Email fallback shown if the webhook is missing or fails. |
+| `GROW_WEBHOOK_SECRET` | HMAC secret for `/api/webhooks/hubspot` (defaults to a public demo secret). |
 
 ## Local setup
 

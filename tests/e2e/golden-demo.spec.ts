@@ -43,12 +43,15 @@ test("golden demo: overview → account → warm path → agent → campaign →
   expect(errors).toEqual([]);
 });
 
-test("public site renders proof from the benchmark artifact", async ({ page }) => {
+test("marketing site: every page renders and the demo form validates", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Turn B2B relationships into a system.");
-  await expect(page.getByText(/Loaded from benchmarks\/results\/latest.json/)).toBeVisible();
-  await page.goto("/benchmarks");
-  await expect(page.getByText("Replay determinism")).toBeVisible();
+  for (const [path, heading] of [["/product", /relationship operating system/i], ["/solutions", /every team/i], ["/integrations", /Connect the tools/i], ["/security", /advantage/i], ["/pricing", /grow with your team/i], ["/contact", /system/i]] as const) {
+    await page.goto(path);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(heading);
+  }
+  await page.goto("/demo");
+  await expect(page).toHaveURL(/\/#overview$/);
 });
 
 test("signed webhook endpoint rejects forgeries", async ({ request }) => {
